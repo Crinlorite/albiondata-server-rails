@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - 'main'
-      - 'workflow'
+#  release:
+#    types: [created]
 
 jobs:
   docker:
@@ -24,6 +25,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: albiondata/albiondata-server-rails:latest
+          tags: albiondata/albiondata-server-rails:main
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
