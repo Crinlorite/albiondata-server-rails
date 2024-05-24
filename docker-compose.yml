@@ -18,10 +18,12 @@ services:
       context: .
     platform: linux/amd64
     container_name: web
-    restart: on-failure
+    restart: no
     volumes:
       - ./:/rails
     environment:
+      RUN_MODE: ${RUN_MODE}
+
       RAILS_ENV: development
 
       MYSQL_WEST_URL: ${MYSQL_WEST_URL}
@@ -59,7 +61,7 @@ services:
       REDIS_EUROPE_URL: ${REDIS_EUROPE_URL}
       ABUSEIPDB_REDIS_URL: ${ABUSEIPDB_REDIS_URL}
       ABUSEIPDB_API_KEY: ${ABUSEIPDB_API_KEY}
-      RACKATTACK_REDIS_URL: ${RACKATTACK_REDIS_URL:-redis://redis:6379/9}
+      RACKATTACK_REDIS_URL: ${RACKATTACK_REDIS_URL}
       THROTTLE_API_1MIN: ${THROTTLE_API_1MIN}
       THROTTLE_API_5MIN: ${THROTTLE_API_5MIN}
       THROTTLE_POW_1MIN: ${THROTTLE_POW_1MIN}
@@ -73,7 +75,7 @@ services:
       ADDITIONAL_MESSAGE_CONTENT: ${ADDITIONAL_MESSAGE_CONTENT}
       DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
     # command: './entrypoint.sh web'
-    entrypoint: ./entrypoint.sh sleep
+#    entrypoint: ./entrypoint.sh sleep
     ports:
       - 3000:3000
     depends_on:
